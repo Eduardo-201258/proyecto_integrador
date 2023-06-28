@@ -15,3 +15,4 @@ app.use("/studyPlan", studyPlanRoute)
 app.listen(3000, () => {
   signale.success("Server online in port 3000");
 });
+
