@@ -10,7 +10,7 @@ export class CreateUserController {
     const data = req.body;
     console.log(data);
     try {
-      const user = await this.createUserUseCase.run(data.name, data.last_name);
+      const user = await this.createUserUseCase.run(data.id_user, data.name, data.last_name);
 
       if (user)
         //Code HTTP : 201 -> Creado
