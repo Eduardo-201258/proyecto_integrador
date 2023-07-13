@@ -1,4 +1,4 @@
-export class User {
+export class Profile {
   constructor(
     readonly id: number,
     readonly id_user: number,

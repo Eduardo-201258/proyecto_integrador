@@ -1,7 +1,7 @@
 import express from "express";
 import { Signale } from "signale";
 
-import { usersRouter } from "./users/infrastructure/UserRouter";
+import { usersRouter } from "./profiles/infrastructure/Profiles";
 
 
 const app = express();
