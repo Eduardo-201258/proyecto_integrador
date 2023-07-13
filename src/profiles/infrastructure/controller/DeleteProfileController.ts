@@ -10,19 +10,10 @@ export class DeleteProfileController {
     try {
       const profile = await this.createProfileUseCase.run(data.id);
 
-      if (profile) {
         res.status(200).send({
-          status: "success",
-          data: profile,
+          status: "success"+profile,
           message: "Perfil eliminado exitosamente",
         });
-
-      } else {
-        res.status(400).send({
-          status: "error",
-          message: "No se encontro el perfil",
-        });
-      }
 
     } catch (error) {
       res.status(404).send({

@@ -34,22 +34,16 @@ export class ProfileRepository_impl implements ProfileRepository {
     }
   }
 
-  async delete(id: number): Promise<Profile | null> {
+  async delete(id: number): Promise<void> {
     try {
-      const query = "SELECT * FROM profiles WHERE id = $1";
-      const result = await pool.query(query, [id]);
-      const profileToDelete = result.rows[0];
+      const deleteQuery = "DELETE FROM profiles WHERE id = $1";
+      await pool.query(deleteQuery, [id]);
   
-      if (profileToDelete) {
-        const deleteQuery = "DELETE FROM profiles WHERE id = $1";
-        await pool.query(deleteQuery, [id]);
-        return profileToDelete;
-      } else {
-        return null;
-      }
+      // Puedes retornar cualquier valor deseado aquí
+      return void("Eliminado con exito");
     } catch (error) {
       console.log(error);
-      return null;
+      return void("Error al eliminar");
     }
   }
 
