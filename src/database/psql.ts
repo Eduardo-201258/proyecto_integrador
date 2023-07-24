@@ -1,11 +1,12 @@
 import { Pool } from "pg";
+import 'dotenv/config';
 
 export const pool = new Pool({
-  user: "postgres",
-  password: "is_upchiapas",
-  host: "127.0.0.1", //"44.215.36.169",
-  database: "integrador",
-  port: 5432,
+  host: process.env.HOST || "localhost",
+  port: +(process.env.PORT || 5432),
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE
 });
 
 async function checkDatabaseConnection() {

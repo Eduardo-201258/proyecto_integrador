@@ -64,12 +64,15 @@
     ]
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/signale": "^1.4.4",
     "amqplib": "^0.10.3",
     "body-parser": "^1.20.1",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
     "mysql2": "^3.2.4",
+    "pg": "^8.11.1",
     "pg-pool": "^3.6.1",
     "pool": "^0.4.1",
     "signale": "^1.4.0"

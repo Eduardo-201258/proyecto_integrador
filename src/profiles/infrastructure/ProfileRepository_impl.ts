@@ -5,10 +5,11 @@ import { pool } from "../../database/psql"
 export class ProfileRepository_impl implements ProfileRepository {
 
   async getByUser(id_user: number): Promise<Profile[] |null> {
+    const client = await pool.connect();
     try {
       console.log(id_user)
       const query = "SELECT * FROM profiles WHERE id_user = $1";
-      const result = await pool.query(query, [id_user]);
+      const result = await client.query(query, [id_user]);
       const profiles = result.rows;
       if(profiles.length > 0){
         return profiles
@@ -18,10 +19,13 @@ export class ProfileRepository_impl implements ProfileRepository {
     } catch (error) {
       console.log(error);
       return null;
+    }finally {
+      client.release();
     }
   }
 
   async create(id_user: number, name: string, last_name: string): Promise<Profile | null> {
+    const client = await pool.connect();
     try {
       const query = "INSERT INTO profiles (id_user, name, last_name) VALUES ($1, $2, $3) RETURNING *";
       const result = await pool.query(query, [id_user, name, last_name]);
@@ -35,12 +39,16 @@ export class ProfileRepository_impl implements ProfileRepository {
     } catch (error) {
       console.log(error);
       return null;
+    }finally {
+      client.release();
     }
   }
 
   async delete(id: number): Promise<Profile | null> {
+    const client = await pool.connect();
+
     const query = "SELECT * FROM profiles WHERE id = $1";
-      const result = await pool.query(query, [id]);
+      const result = await client.query(query, [id]);
       const profiles = result.rows[0];
 
     try {
@@ -52,13 +60,16 @@ export class ProfileRepository_impl implements ProfileRepository {
     } catch (error) {
       console.log(error);
       return null;
+    }finally {
+      client.release();
     }
   }
 
   async update(id: number, id_user: number, name: string, last_name: string): Promise<Profile | null> {
+    const client = await pool.connect();
     try {
       const query = "UPDATE profiles SET id_user = $1, name = $2, last_name = $3 WHERE id = $4";
-      const result = await pool.query(query, [id_user, name, last_name, id]);
+      const result = await client.query(query, [id_user, name, last_name, id]);
       
       if (result.rowCount > 0) {
         const updatedProfileQuery = "SELECT * FROM profiles WHERE id = $1";
@@ -71,6 +82,8 @@ export class ProfileRepository_impl implements ProfileRepository {
     } catch (error) {
       console.log(error);
       return null;
+    }finally {
+      client.release();
     }
   }
   
