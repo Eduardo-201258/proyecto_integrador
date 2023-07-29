@@ -4,12 +4,12 @@ import { pool } from "../../database/psql"
 
 export class ProfileRepository_impl implements ProfileRepository {
 
-  async getByUser(id_user: number): Promise<Profile[] |null> {
+  async getByUser(id_profile: number): Promise<Profile[] |null> {
     const client = await pool.connect();
     try {
-      console.log(id_user)
+      console.log(id_profile)
       const query = "SELECT * FROM profiles WHERE id_user = $1";
-      const result = await client.query(query, [id_user]);
+      const result = await client.query(query, [id_profile]);
       const profiles = result.rows;
       if(profiles.length > 0){
         return profiles

@@ -16,7 +16,7 @@ export const validateRol = async (req: Request, res: Response, next: NextFunctio
 
 export const getRol = async (id: number): Promise<number> =>{
     if(id == 1){
-        // este usuario es gratuito y no tiene privilegios
+
         return 1;
     }
     if(id > 3 || id <1){
